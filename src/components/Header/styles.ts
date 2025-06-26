@@ -4,13 +4,12 @@ import headerbg from '../../assets/images/header_bg.svg'
 
 export const HeaderBar = styled.header`
   width: 100%;
-  height: 360px;
-  background-color: ${cores.rosa2};
+  background-color: ${cores.rosa};
   background-image: url(${headerbg});
   padding: 40px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 138px;
   align-items: center;
 `
 
