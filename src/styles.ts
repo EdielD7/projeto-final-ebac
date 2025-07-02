@@ -25,4 +25,15 @@ export const GlobalCss = createGlobalStyle`
     margin: 0 auto;
     width: 100%;
   }
+
+  .loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    h3 {
+      font-size: 36px;
+    }
+  }
 `

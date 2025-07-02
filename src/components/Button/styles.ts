@@ -16,6 +16,7 @@ export const Tag = styled.div`
   font-size: 12px;
   padding: 6px 4px;
   margin-left: 8px;
+  text-transform: capitalize;
 `
 
 // Link com os estilos base

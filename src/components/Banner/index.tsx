@@ -1,12 +1,16 @@
-import { Imagem, Titulo, Precos } from './styles'
+import { Imagem, Titulo, Tipo } from './styles'
 
-import bannerImg from '../../assets/images/banner.png'
+type Props = {
+  tipo: string
+  titulo: string
+  capa: string
+}
 
-const Banner = () => (
-  <Imagem style={{ backgroundImage: `url(${bannerImg})` }}>
+const Banner = ({ tipo, titulo, capa }: Props) => (
+  <Imagem style={{ backgroundImage: `url(${capa})` }}>
     <div className="container">
-      <Precos>Italiana</Precos>
-      <Titulo>La Dolce Vita Trattoria</Titulo>
+      <Tipo>{tipo}</Tipo>
+      <Titulo>{titulo}</Titulo>
     </div>
   </Imagem>
 )

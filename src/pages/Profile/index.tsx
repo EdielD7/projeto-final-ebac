@@ -1,61 +1,45 @@
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+
 import ProductsList from '../../components/ProductsList'
 import Header from '../../components/Header'
-import Product from '../../models/ProductData'
 
-import marguerita from '../../assets/images/marguerita.png'
 import Banner from '../../components/Banner'
+import { Restaurante } from '../Home'
 
-const products: Product[] = [
-  {
-    id: 1,
-    title: 'Pizza Marguerita',
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    image: marguerita
-  },
-  {
-    id: 2,
-    title: 'Pizza Calabresa',
-    description:
-      'Uma pizza irresistiível: molho de tomate suculento, mussarela derretida, calabresa crocante e um toque de azeite. Sabor e simplicidade!',
-    image: marguerita
-  },
-  {
-    id: 3,
-    title: 'Pizza Portuguesa',
-    description:
-      'Uma pizza irresistiível: molho de tomate suculento, mussarela derretida, calabresa crocante e um toque de azeite. Sabor e simplicidade!',
-    image: marguerita
-  },
-  {
-    id: 4,
-    title: 'Pizza Quatro Queijos',
-    description:
-      'Uma pizza irresistiível: molho de tomate suculento, mussarela derretida, calabresa crocante e um toque de azeite. Sabor e simplicidade!',
-    image: marguerita
-  },
-  {
-    id: 5,
-    title: 'Pizza Napolitana',
-    description:
-      'Uma pizza irresistiível: molho de tomate suculento, mussarela derretida, calabresa crocante e um toque de azeite. Sabor e simplicidade!',
-    image: marguerita
-  },
-  {
-    id: 6,
-    title: 'Pizza Frango com Catupiry',
-    description:
-      'Uma pizza irresistiível: molho de tomate suculento, mussarela derretida, calabresa crocante e um toque de azeite. Sabor e simplicidade!',
-    image: marguerita
+const Profile = () => {
+  const { id } = useParams()
+
+  const [restaurante, setRestaurante] = useState<Restaurante>()
+
+  useEffect(() => {
+    fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
+      .then((res) => res.json())
+      .then((data: Restaurante) => setRestaurante(data))
+  }, [id])
+
+  if (!restaurante) {
+    return (
+      <>
+        <Header />
+        <div className="loading">
+          <h3>Carregando...</h3>
+        </div>
+      </>
+    )
   }
-]
 
-const Profile = () => (
-  <>
-    <Header />
-    <Banner />
-    <ProductsList products={products} />
-  </>
-)
+  return (
+    <>
+      <Header />
+      <Banner
+        tipo={restaurante.tipo}
+        titulo={restaurante.titulo}
+        capa={restaurante.capa}
+      />
+      <ProductsList cardapio={restaurante.cardapio} />
+    </>
+  )
+}
 
 export default Profile

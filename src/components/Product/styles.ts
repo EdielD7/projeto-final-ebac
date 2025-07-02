@@ -24,6 +24,9 @@ export const Descricao = styled.p`
 
 export const Img = styled.img`
   display: block;
+  width: 304px;
+  height: 167px;
+  object-fit: cover;
 `
 
 export const Button = styled.button`
