@@ -9,6 +9,7 @@ export interface CardapioItem {
   id: number
   nome: string
   descricao: string
+  porcao: string
 }
 
 export interface Restaurante {
