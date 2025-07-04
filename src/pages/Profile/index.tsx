@@ -6,6 +6,7 @@ import Header from '../../components/Header'
 import Banner from '../../components/Banner'
 
 import { useGetRestauranteQuery } from '../../services/api'
+import Cart from '../../components/Cart'
 
 const Profile = () => {
   const { id } = useParams()
@@ -32,6 +33,7 @@ const Profile = () => {
         capa={restaurante.capa}
       />
       <ProductsList cardapio={restaurante.cardapio} />
+      <Cart />
     </>
   )
 }
