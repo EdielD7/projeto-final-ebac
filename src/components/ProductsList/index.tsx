@@ -17,6 +17,7 @@ const ProductsList = ({ cardapio }: Props) => (
             title={item.nome}
             description={item.descricao}
             portion={item.porcao}
+            cardapioitem={item}
           />
         ))}
       </List>

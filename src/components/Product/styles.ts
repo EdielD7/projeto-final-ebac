@@ -33,7 +33,7 @@ export const Button = styled.button`
   background-color: ${cores.rosa};
   color: ${cores.rosaEscuro};
   border: none;
-  padding: 4px;
+  padding: 4px 8px;
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;

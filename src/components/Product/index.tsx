@@ -10,8 +10,12 @@ import {
 } from './styles'
 import fechar from '../../assets/images/fechar.svg'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { add, open } from '../../store/reducers/cart'
+import { CardapioItem } from '../../pages/Home'
 
 type Props = {
+  cardapioitem: CardapioItem
   title: string
   description: string
   image: string
@@ -23,17 +27,37 @@ interface ModalState {
   isVisible: boolean
 }
 
-const Product = ({ title, description, image, portion }: Props) => {
+export const formataPreco = (preco = 0) => {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(preco)
+}
+
+const Product = ({
+  cardapioitem,
+  title,
+  description,
+  image,
+  portion
+}: Props) => {
   const [modal, setModal] = useState<ModalState>({
     url: '',
     isVisible: false
   })
 
   const getDescricao = (descricao: string) => {
-    if (descricao.length > 170) {
-      return descricao.slice(0, 167) + '...'
+    if (descricao.length > 160) {
+      return descricao.slice(0, 157) + '...'
     }
     return descricao
+  }
+
+  const dispatch = useDispatch()
+
+  const addToCart = () => {
+    dispatch(add(cardapioitem))
+    dispatch(open())
   }
 
   const closeModal = () => {
@@ -41,6 +65,11 @@ const Product = ({ title, description, image, portion }: Props) => {
       isVisible: false,
       url: ''
     })
+  }
+
+  const botaoModal = () => {
+    addToCart()
+    closeModal()
   }
 
   return (
@@ -67,7 +96,9 @@ const Product = ({ title, description, image, portion }: Props) => {
                 <br />
                 {portion}
               </p>
-              <Button>Adicionar ao carrinho</Button>
+              <Button onClick={botaoModal}>
+                Adicionar ao carrinho - {formataPreco(cardapioitem.preco)}
+              </Button>
             </div>
           </ModalContainer>
           <img

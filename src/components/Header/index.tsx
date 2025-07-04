@@ -11,14 +11,16 @@ import {
 } from './styles' // Ajustaremos os styles em breve
 
 import logo from '../../assets/images/logo.svg'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { open } from '../../store/reducers/cart'
+import { RootReducer } from '../../store'
 
 const Header = () => {
   const location = useLocation() // Hook para obter a localização atual
   const isProfilePage = location.pathname.startsWith('/profile') // Verifica se a rota começa com /profile/
 
   const dispatch = useDispatch()
+  const { items } = useSelector((state: RootReducer) => state.cart)
 
   const openCart = () => {
     dispatch(open())
@@ -37,7 +39,9 @@ const Header = () => {
               </li>
             </Links>
             <ProfileLogo src={logo} alt="EFOOD" />
-            <CartLink onClick={openCart}>0 produto(s) no carrinho</CartLink>
+            <CartLink onClick={openCart}>
+              {items.length} produto(s) no carrinho
+            </CartLink>
           </>
         ) : (
           // Conteúdo original da Home Page
