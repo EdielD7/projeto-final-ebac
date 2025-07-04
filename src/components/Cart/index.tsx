@@ -9,38 +9,51 @@ import {
 
 import marguerita from '../../assets/images/marguerita.png'
 import { Button } from '../Product/styles'
+import { RootReducer } from '../../store'
+import { useDispatch, useSelector } from 'react-redux'
+import { close } from '../../store/reducers/cart'
 
-const Cart = () => (
-  <CartContainer>
-    <Overlay />
-    <Sidebar>
-      <ul>
-        <CartItem>
-          <img src={marguerita} alt="star wars" />
-          <div>
-            <h3>Nome do produto</h3>
-            <span>R$ 250</span>
-          </div>
-          <button type="button" />
-        </CartItem>
-        <CartItem>
-          <img src={marguerita} alt="star wars" />
-          <div>
-            <h3>Nome do produto</h3>
-            <span>R$ 250</span>
-          </div>
-          <button type="button" />
-        </CartItem>
-      </ul>
-      <ValorContainer>
-        <Total>Valor total</Total>
-        <Total>R$ 182,70</Total>
-      </ValorContainer>
-      <Button title="Clique para continuar com a entrega">
-        Continuar com a entrega
-      </Button>
-    </Sidebar>
-  </CartContainer>
-)
+const Cart = () => {
+  const { isOpen } = useSelector((state: RootReducer) => state.cart)
+
+  const dispatch = useDispatch()
+
+  const closeCart = () => {
+    dispatch(close())
+  }
+
+  return (
+    <CartContainer className={isOpen ? 'is-open' : ''}>
+      <Overlay onClick={closeCart} />
+      <Sidebar>
+        <ul>
+          <CartItem>
+            <img src={marguerita} alt="star wars" />
+            <div>
+              <h3>Nome do produto</h3>
+              <span>R$ 250</span>
+            </div>
+            <button type="button" />
+          </CartItem>
+          <CartItem>
+            <img src={marguerita} alt="star wars" />
+            <div>
+              <h3>Nome do produto</h3>
+              <span>R$ 250</span>
+            </div>
+            <button type="button" />
+          </CartItem>
+        </ul>
+        <ValorContainer>
+          <Total>Valor total</Total>
+          <Total>R$ 182,70</Total>
+        </ValorContainer>
+        <Button title="Clique para continuar com a entrega">
+          Continuar com a entrega
+        </Button>
+      </Sidebar>
+    </CartContainer>
+  )
+}
 
 export default Cart

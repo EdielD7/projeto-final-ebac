@@ -11,10 +11,18 @@ import {
 } from './styles' // Ajustaremos os styles em breve
 
 import logo from '../../assets/images/logo.svg'
+import { useDispatch } from 'react-redux'
+import { open } from '../../store/reducers/cart'
 
 const Header = () => {
   const location = useLocation() // Hook para obter a localização atual
   const isProfilePage = location.pathname.startsWith('/profile') // Verifica se a rota começa com /profile/
+
+  const dispatch = useDispatch()
+
+  const openCart = () => {
+    dispatch(open())
+  }
 
   return (
     // Passamos a prop 'isProfilePage' para o nosso container de estilo
@@ -29,7 +37,7 @@ const Header = () => {
               </li>
             </Links>
             <ProfileLogo src={logo} alt="EFOOD" />
-            <CartLink>0 produto(s) no carrinho</CartLink>
+            <CartLink onClick={openCart}>0 produto(s) no carrinho</CartLink>
           </>
         ) : (
           // Conteúdo original da Home Page
