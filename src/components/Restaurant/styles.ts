@@ -1,9 +1,10 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 export const Card = styled.div`
   background-color: #fff;
   position: relative;
+  width: 100%;
 `
 
 export const CardBody = styled.div`
@@ -40,7 +41,7 @@ export const Infos = styled.div`
 
 export const Img = styled.img`
   display: block;
-  width: 472px;
+  width: 100%;
   height: 217px;
   object-fit: cover;
 `

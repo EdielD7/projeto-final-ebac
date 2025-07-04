@@ -7,6 +7,11 @@ export const cores = {
   rosaEscuro: '#E66767'
 }
 
+export const breakpoints = {
+  desktop: '1024px',
+  tablet: '767px'
+}
+
 export const GlobalCss = createGlobalStyle`
   * {
     margin: 0;
@@ -24,6 +29,10 @@ export const GlobalCss = createGlobalStyle`
     max-width: 1024px;
     margin: 0 auto;
     width: 100%;
+
+    @media (max-width: ${breakpoints.desktop}) {
+      max-width: 90%;
+    }
   }
 
   .loading {

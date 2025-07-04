@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 import headerbg from '../../assets/images/header_bg.svg'
 import { Link } from 'react-router-dom' // A importação é usada aqui
 
@@ -11,7 +11,6 @@ export const HeaderBar = styled.header<HeaderBarProps>`
   width: 100%;
   background-color: ${cores.rosa};
   background-image: url(${headerbg});
-  padding: 40px;
 
   height: ${(props) => (props.isProfilePage ? '138px' : '360px')};
 
@@ -31,7 +30,9 @@ const LogoBase = styled.img`
 `
 
 // Logo para a Home (sem posicionamento especial)
-export const HomeLogo = styled(LogoBase)``
+export const HomeLogo = styled(LogoBase)`
+  margin-top: 40px;
+`
 
 // Logo para a página de Perfil (com posicionamento absoluto)
 export const ProfileLogo = styled(LogoBase)`
@@ -45,7 +46,11 @@ export const Titulo = styled.h2`
   font-size: 36px;
   font-weight: 900;
   text-align: center;
-  margin-top: 138px;
+  margin-bottom: 40px;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    font-size: 24px;
+  }
 `
 
 export const RestaurantesLink = styled(Link)`

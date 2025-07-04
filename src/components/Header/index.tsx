@@ -8,7 +8,7 @@ import {
   RestaurantesLink,
   ProfileLogo,
   HomeLogo
-} from './styles' // Ajustaremos os styles em breve
+} from './styles'
 
 import logo from '../../assets/images/logo.svg'
 import { useDispatch, useSelector } from 'react-redux'
@@ -27,12 +27,11 @@ const Header = () => {
   }
 
   return (
-    // Passamos a prop 'isProfilePage' para o nosso container de estilo
+    // Passa a prop 'isProfilePage' para o nosso container de estilo
     <HeaderBar isProfilePage={isProfilePage}>
       <div className="container">
-        {/* Renderização condicional dos elementos do Header */}
         {isProfilePage ? (
-          <>
+          <div className="container">
             <Links>
               <li>
                 <RestaurantesLink to="/">Restaurantes</RestaurantesLink>
@@ -42,16 +41,16 @@ const Header = () => {
             <CartLink onClick={openCart}>
               {items.length} produto(s) no carrinho
             </CartLink>
-          </>
+          </div>
         ) : (
           // Conteúdo original da Home Page
-          <>
+          <div className="container">
             <HomeLogo src={logo} alt="EFOOD" />
             <Titulo>
               Viva experiências gastronômicas
               <br /> no conforto da sua casa
             </Titulo>
-          </>
+          </div>
         )}
       </div>
     </HeaderBar>

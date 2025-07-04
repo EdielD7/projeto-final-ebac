@@ -5,8 +5,9 @@ export const Card = styled.div`
   padding: 8px;
   background-color: ${cores.rosaEscuro};
   color: ${cores.rosa};
-  display: flex;
-  flex-direction: column;
+  display: block;
+  /* max-width: 320px; */
+  width: 100%;
 `
 
 export const Title = styled.h3`
@@ -24,7 +25,7 @@ export const Descricao = styled.p`
 
 export const Img = styled.img`
   display: block;
-  width: 304px;
+  width: 100%;
   height: 167px;
   object-fit: cover;
 `
