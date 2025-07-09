@@ -13,6 +13,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { add, open } from '../../store/reducers/cart'
 import { CardapioItem } from '../../pages/Home'
+import { formataPreco } from '../../utils'
 
 type Props = {
   cardapioitem: CardapioItem
@@ -25,13 +26,6 @@ type Props = {
 interface ModalState {
   url: string
   isVisible: boolean
-}
-
-export const formataPreco = (preco = 0) => {
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  }).format(preco)
 }
 
 const Product = ({

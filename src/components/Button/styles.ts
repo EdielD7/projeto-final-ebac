@@ -26,3 +26,17 @@ export const ButtonLink = styled(Link)`
   font-size: 14px;
   padding: 4px 6px;
 `
+
+export const DefaultButton = styled.button`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  background-color: ${cores.rosa};
+  color: ${cores.rosaEscuro};
+  border: none;
+  height: 24px;
+  padding: 4px 0;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+`

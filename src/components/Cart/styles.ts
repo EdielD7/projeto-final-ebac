@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { cores } from '../../styles'
 
 import lixeira from '../../assets/images/lixeira.svg'
-import { Button } from '../Product/styles'
+import { DefaultButton } from '../Button/styles'
 
 export const Overlay = styled.div`
   position: absolute;
@@ -26,6 +26,13 @@ export const CartContainer = styled.div`
   &.is-open {
     display: flex;
   }
+
+  .empty-text {
+    font-size: 14px;
+    line-height: 22px;
+    color: ${cores.branca};
+    text-align: center;
+  }
 `
 
 export const Sidebar = styled.aside`
@@ -35,25 +42,37 @@ export const Sidebar = styled.aside`
   max-width: 360px;
   width: 100%;
 
-  ${Button} {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    padding: 4px 0;
+  ${DefaultButton} {
+    margin-bottom: 8px;
   }
 `
 
-export const ValorContainer = styled.div`
+export const Inputs = styled.div`
   display: flex;
-  justify-content: space-between;
-  margin-top: 40px;
-  margin-bottom: 16px;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
 `
 
-export const Total = styled.p`
+export const Title = styled.h2`
+  color: ${cores.rosa};
+  font-size: 16px;
+  font-weight: bold;
+  padding-bottom: 16px;
+`
+
+// export const ValorContainer = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+//   margin-top: 40px;
+//   margin-bottom: 16px;
+// `
+
+export const TotalValue = styled.p`
   font-weight: 700;
   font-size: 14px;
   color: ${cores.rosa};
+  margin-bottom: 16px;
 `
 
 export const CartItem = styled.li`
@@ -64,7 +83,7 @@ export const CartItem = styled.li`
   color: ${cores.rosaEscuro};
   margin-bottom: 16px;
 
-  img {
+  > img {
     width: 80px;
     height: 80px;
     object-fit: cover;
@@ -92,5 +111,37 @@ export const CartItem = styled.li`
     position: absolute;
     bottom: 8px;
     right: 8px;
+  }
+`
+
+// ... (mantenha todos os seus estilos existentes)
+
+// Estilos para os formulários
+export const Row = styled.div`
+  display: flex;
+  column-gap: 24px;
+`
+
+export const InputGroup = styled.div`
+  flex: auto;
+
+  label {
+    font-size: 14px;
+    font-weight: bold;
+    color: ${cores.rosa};
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  input {
+    background-color: ${cores.rosa};
+    border: 1px solid ${cores.rosa};
+    height: 32px;
+    padding: 0 8px;
+    width: 100%;
+
+    &.error {
+      border: 2px solid red;
+    }
   }
 `

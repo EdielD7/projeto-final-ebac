@@ -1,19 +1,26 @@
-import { Tag, ButtonLink } from './styles'
+import { Tag, ButtonLink, DefaultButton } from './styles'
 
 type Props = {
-  type?: 'tag' | 'link'
+  variant?: 'tag' | 'link' | 'button'
   title: string
+  type?: string
   to?: string
   onClick?: () => void
   children: string
 }
 
-const Button = ({ type, title, to, onClick, children }: Props) => {
-  if (type === 'tag') {
+const Button = ({ variant, title, to, onClick, children }: Props) => {
+  if (variant === 'tag') {
     return (
       <Tag title={title} onClick={onClick}>
         {children}
       </Tag>
+    )
+  } else if (variant === 'button') {
+    return (
+      <DefaultButton title={title} onClick={onClick}>
+        {children}
+      </DefaultButton>
     )
   }
 
