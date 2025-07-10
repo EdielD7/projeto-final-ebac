@@ -26,7 +26,7 @@ const CartView = ({
             <CartItem key={item.id}>
               <img src={item.foto} alt={item.nome} />
               <div>
-                <Title>{item.nome}</Title>
+                <Title $variant="cart">{item.nome}</Title>
                 <span>{formataPreco(item.preco)}</span>
               </div>
               <button type="button" onClick={() => onRemoveItem(item.id)}>

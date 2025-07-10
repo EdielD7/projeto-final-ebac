@@ -4,6 +4,10 @@ import { cores } from '../../styles'
 import lixeira from '../../assets/images/lixeira.svg'
 import { DefaultButton } from '../Button/styles'
 
+type TitleProps = {
+  $variant?: 'cart'
+}
+
 export const Overlay = styled.div`
   position: absolute;
   top: 0;
@@ -54,8 +58,9 @@ export const Inputs = styled.div`
   margin-bottom: 24px;
 `
 
-export const Title = styled.h2`
-  color: ${cores.rosa};
+export const Title = styled.h2<TitleProps>`
+  color: ${({ $variant }) =>
+    $variant === 'cart' ? cores.rosaEscuro : cores.rosa};
   font-size: 16px;
   font-weight: bold;
   padding-bottom: 16px;
@@ -131,6 +136,10 @@ export const InputGroup = styled.div`
     color: ${cores.rosa};
     margin-bottom: 8px;
     display: block;
+  }
+
+  small {
+    color: ${cores.rosa};
   }
 
   input {

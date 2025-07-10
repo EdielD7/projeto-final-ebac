@@ -35,10 +35,7 @@ const Product = ({
   image,
   portion
 }: Props) => {
-  const [modal, setModal] = useState<ModalState>({
-    url: '',
-    isVisible: false
-  })
+  const [isModalVisible, setModalVisible] = useState(false)
 
   const getDescricao = (descricao: string) => {
     if (descricao.length > 160) {
@@ -55,10 +52,7 @@ const Product = ({
   }
 
   const closeModal = () => {
-    setModal({
-      isVisible: false,
-      url: ''
-    })
+    setModalVisible(false)
   }
 
   const botaoModal = () => {
@@ -74,14 +68,14 @@ const Product = ({
         <Title>{title}</Title>
 
         <Descricao>{getDescricao(description)}</Descricao>
-        <Button onClick={() => setModal({ url: image, isVisible: true })}>
+        <Button onClick={() => setModalVisible(true)}>
           Adicionar ao carrinho
         </Button>
       </Card>
-      <Modal className={modal.isVisible ? 'visivel' : ''}>
+      <Modal className={isModalVisible ? 'visivel' : ''}>
         <ModalContent className="container">
           <ModalContainer>
-            <img src={modal.url} alt={title} />
+            <img src={image} alt={title} />
             <div>
               <h3>{title}</h3>
               <p>

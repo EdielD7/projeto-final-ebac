@@ -28,7 +28,7 @@ const Header = () => {
 
   return (
     // Passa a prop 'isProfilePage' para o nosso container de estilo
-    <HeaderBar isProfilePage={isProfilePage}>
+    <HeaderBar $isProfilePage={isProfilePage}>
       <div className="container">
         {isProfilePage ? (
           <div className="container">

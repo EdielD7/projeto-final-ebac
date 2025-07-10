@@ -4,7 +4,7 @@ import headerbg from '../../assets/images/header_bg.svg'
 import { Link } from 'react-router-dom' // A importação é usada aqui
 
 type HeaderBarProps = {
-  isProfilePage: boolean
+  $isProfilePage: boolean
 }
 
 export const HeaderBar = styled.header<HeaderBarProps>`
@@ -12,14 +12,14 @@ export const HeaderBar = styled.header<HeaderBarProps>`
   background-color: ${cores.rosa};
   background-image: url(${headerbg});
 
-  height: ${(props) => (props.isProfilePage ? '138px' : '360px')};
+  height: ${(props) => (props.$isProfilePage ? '138px' : '360px')};
 
   .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    flex-direction: ${(props) => (props.isProfilePage ? 'row' : 'column')};
+    flex-direction: ${(props) => (props.$isProfilePage ? 'row' : 'column')};
     position: relative;
     height: 100%;
   }

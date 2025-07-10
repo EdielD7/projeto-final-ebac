@@ -3,14 +3,30 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { RootReducer } from '../../store'
 import { close, remove } from '../../store/reducers/cart'
-import { formataPreco } from '../../utils'
 
 import { Overlay, CartContainer, Sidebar } from './styles'
+import * as Yup from 'yup'
 
 // Componentes para cada etapa do checkout
 import CartView from './CartView'
 import DeliveryForm from './DeliveryForm'
 import PaymentForm from './PaymentForm'
+import { useFormik } from 'formik'
+
+export interface FormikData {
+  receiver: string
+  address: string
+  city: string
+  zipCode: string
+  number: string
+  complement: string
+
+  cardOwner: string
+  cardNumber: string
+  cvv: string
+  expiresMonth: string
+  expiresYear: string
+}
 
 // Para garantir a tipagem das etapas
 export type Step = 'cart' | 'delivery' | 'payment'
@@ -21,6 +37,47 @@ const Cart = () => {
 
   // 1. Estado para controlar a etapa atual
   const [currentStep, setCurrentStep] = useState<Step>('cart')
+
+  const formik = useFormik({
+    initialValues: {
+      // Campos de Entrega
+      receiver: '',
+      address: '',
+      city: '',
+      zipCode: '',
+      number: '',
+      complement: '',
+      // Campos de Pagamento
+      cardOwner: '',
+      cardNumber: '',
+      cvv: '',
+      expiresMonth: '',
+      expiresYear: ''
+    },
+    validationSchema: Yup.object({
+      // Validações de Entrega
+      receiver: Yup.string()
+        .min(5, 'O nome precisa ter pelo menos 5 caracteres')
+        .required('O campo é obrigatório'),
+      address: Yup.string().required('O campo é obrigatório'),
+      city: Yup.string().required('O campo é obrigatório'),
+      zipCode: Yup.string()
+        .min(8, 'O CEP precisa ter 8 caracteres')
+        .max(8, 'O CEP precisa ter 8 caracteres')
+        .required('O campo é obrigatório'),
+      number: Yup.string().required('O campo é obrigatório'),
+
+      // Validações de Pagamento (poderiam ser mais complexas)
+      cardOwner: Yup.string().required('O campo é obrigatório'),
+      cardNumber: Yup.string().required('O campo é obrigatório'),
+      cvv: Yup.string().required('O campo é obrigatório'),
+      expiresMonth: Yup.string().required('O campo é obrigatório'),
+      expiresYear: Yup.string().required('O campo é obrigatório')
+    }),
+    onSubmit: (values) => {
+      console.log(values)
+    }
+  })
 
   const closeCart = () => {
     dispatch(close())
@@ -44,10 +101,14 @@ const Cart = () => {
     switch (currentStep) {
       case 'delivery':
         return (
-          <DeliveryForm onBackToCart={goToCart} onGoToPayment={goToPayment} />
+          <DeliveryForm
+            formik={formik}
+            onBackToCart={goToCart}
+            onGoToPayment={goToPayment}
+          />
         )
       case 'payment':
-        return <PaymentForm onBackToDelivery={goToDelivery} />
+        return <PaymentForm formik={formik} onBackToDelivery={goToDelivery} />
       case 'cart':
       default:
         return (
@@ -64,7 +125,9 @@ const Cart = () => {
   return (
     <CartContainer className={isOpen ? 'is-open' : ''}>
       <Overlay onClick={closeCart} />
-      <Sidebar>{renderStepComponent()}</Sidebar>
+      <Sidebar>
+        <form onSubmit={formik.handleSubmit}>{renderStepComponent()}</form>
+      </Sidebar>
     </CartContainer>
   )
 }
