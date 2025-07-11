@@ -9,13 +9,19 @@ const Footer = () => (
     <Logo src={logo} alt="efood" />
     <Social>
       <li>
-        <img src={instagram} alt="Instagram" />
+        <a target="_blank" href="https://instagram.com" rel="noreferrer">
+          <img src={instagram} alt="Instagram" />
+        </a>
       </li>
       <li>
-        <img src={facebook} alt="Facebook" />
+        <a target="_blank" href="https://facebook.com" rel="noreferrer">
+          <img src={facebook} alt="Facebook" />
+        </a>
       </li>
       <li>
-        <img src={twitter} alt="Twitter" />
+        <a target="_blank" href="https://twitter.com" rel="noreferrer">
+          <img src={twitter} alt="Twitter" />
+        </a>
       </li>
     </Social>
     <Texto>
