@@ -43,8 +43,7 @@ const Cart = () => {
 
   const [orderId, setOrderId] = useState('')
 
-  const [purchase, { isLoading, isError, data, isSuccess }] =
-    usePurchaseMutation()
+  const [purchase, { data }] = usePurchaseMutation()
 
   const formik = useFormik({
     initialValues: {
