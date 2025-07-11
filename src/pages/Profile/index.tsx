@@ -12,7 +12,7 @@ import Cart from '../../components/Cart'
 const Profile = () => {
   const { id } = useParams()
 
-  const { data: restaurante } = useGetRestauranteQuery(id!)
+  const { data: restaurante } = useGetRestauranteQuery(id ?? '')
 
   if (!restaurante) {
     return (

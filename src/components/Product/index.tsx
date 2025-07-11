@@ -1,13 +1,4 @@
-import {
-  Card,
-  Title,
-  Descricao,
-  Img,
-  Modal,
-  ModalContent,
-  ModalContainer,
-  ModalButton
-} from './styles'
+import * as S from './styles'
 import fechar from '../../assets/images/fechar.svg'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -58,12 +49,12 @@ const Product = ({
 
   return (
     <>
-      <Card>
-        <Img src={image} alt={title} />
+      <S.Card>
+        <S.Img src={image} alt={title} />
 
-        <Title>{title}</Title>
+        <S.Title>{title}</S.Title>
 
-        <Descricao>{getDescricao(description)}</Descricao>
+        <S.Descricao>{getDescricao(description)}</S.Descricao>
         <Button
           variant="button"
           title="Adicionar ao carrinho"
@@ -71,10 +62,10 @@ const Product = ({
         >
           Adicionar ao carrinho
         </Button>
-      </Card>
-      <Modal className={isModalVisible ? 'visivel' : ''}>
-        <ModalContent className="container">
-          <ModalContainer>
+      </S.Card>
+      <S.Modal className={isModalVisible ? 'visivel' : ''}>
+        <S.ModalContent className="container">
+          <S.ModalContainer>
             <img src={image} alt={title} />
             <div>
               <h3>{title}</h3>
@@ -84,11 +75,11 @@ const Product = ({
                 <br />
                 {portion}
               </p>
-              <ModalButton title="Adicionar ao carrinho" onClick={botaoModal}>
+              <S.ModalButton title="Adicionar ao carrinho" onClick={botaoModal}>
                 {`Adicionar ao carrinho - ${formataPreco(cardapioitem.preco)}`}
-              </ModalButton>
+              </S.ModalButton>
             </div>
-          </ModalContainer>
+          </S.ModalContainer>
           <img
             src={fechar}
             alt="Ícone de fechar"
@@ -96,14 +87,14 @@ const Product = ({
               closeModal()
             }}
           />
-        </ModalContent>
+        </S.ModalContent>
         <div
           onClick={() => {
             closeModal()
           }}
           className="overlay"
         ></div>
-      </Modal>
+      </S.Modal>
     </>
   )
 }

@@ -1,7 +1,10 @@
 import { FormikProps } from 'formik'
+
 import Button from '../Button'
-import { InputGroup, Inputs, Row, Title } from './styles'
+
 import { FormikData } from '.'
+
+import * as S from './styles'
 
 type Props = {
   formik: FormikProps<FormikData>
@@ -48,9 +51,9 @@ const DeliveryForm = ({ formik, onBackToCart, onGoToPayment }: Props) => {
 
   return (
     <>
-      <Title>Entrega</Title>
-      <Inputs>
-        <InputGroup>
+      <S.Title>Entrega</S.Title>
+      <S.Inputs>
+        <S.InputGroup>
           <label htmlFor="receiver">Quem irá receber</label>
           <input
             id="receiver"
@@ -61,8 +64,8 @@ const DeliveryForm = ({ formik, onBackToCart, onGoToPayment }: Props) => {
             onBlur={formik.handleBlur}
           />
           <small>{getErrorMessage('receiver', formik.errors.receiver)}</small>
-        </InputGroup>
-        <InputGroup>
+        </S.InputGroup>
+        <S.InputGroup>
           <label htmlFor="address">Endereço</label>
           <input
             id="address"
@@ -73,8 +76,8 @@ const DeliveryForm = ({ formik, onBackToCart, onGoToPayment }: Props) => {
             onBlur={formik.handleBlur}
           />
           <small>{getErrorMessage('address', formik.errors.address)}</small>
-        </InputGroup>
-        <InputGroup>
+        </S.InputGroup>
+        <S.InputGroup>
           <label htmlFor="city">Cidade</label>
           <input
             id="city"
@@ -85,9 +88,9 @@ const DeliveryForm = ({ formik, onBackToCart, onGoToPayment }: Props) => {
             onBlur={formik.handleBlur}
           />
           <small>{getErrorMessage('city', formik.errors.city)}</small>
-        </InputGroup>
-        <Row>
-          <InputGroup>
+        </S.InputGroup>
+        <S.Row>
+          <S.InputGroup>
             <label htmlFor="zipCode">CEP</label>
             <input
               id="zipCode"
@@ -98,8 +101,8 @@ const DeliveryForm = ({ formik, onBackToCart, onGoToPayment }: Props) => {
               onBlur={formik.handleBlur}
             />
             <small>{getErrorMessage('zipCode', formik.errors.zipCode)}</small>
-          </InputGroup>
-          <InputGroup>
+          </S.InputGroup>
+          <S.InputGroup>
             <label htmlFor="number">Número</label>
             <input
               id="number"
@@ -110,9 +113,9 @@ const DeliveryForm = ({ formik, onBackToCart, onGoToPayment }: Props) => {
               onBlur={formik.handleBlur}
             />
             <small>{getErrorMessage('number', formik.errors.number)}</small>
-          </InputGroup>
-        </Row>
-        <InputGroup>
+          </S.InputGroup>
+        </S.Row>
+        <S.InputGroup>
           <label htmlFor="complement">Complemento (opcional)</label>
           <input
             id="complement"
@@ -125,8 +128,8 @@ const DeliveryForm = ({ formik, onBackToCart, onGoToPayment }: Props) => {
           <small>
             {getErrorMessage('complement', formik.errors.complement)}
           </small>
-        </InputGroup>
-      </Inputs>
+        </S.InputGroup>
+      </S.Inputs>
       <Button
         variant="button"
         title="Clique para ir para o pagamento"

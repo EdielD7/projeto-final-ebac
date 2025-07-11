@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
-import { RootReducer } from '../../store'
-import { close, remove, clear } from '../../store/reducers/cart'
-
-import { Overlay, CartContainer, Sidebar } from './styles'
 import * as Yup from 'yup'
 
-// Componentes para cada etapa do checkout
 import CartView from './CartView'
 import DeliveryForm from './DeliveryForm'
 import PaymentForm from './PaymentForm'
 import Confirmation from './Confirmation'
+
+import { RootReducer } from '../../store'
+import { close, remove, clear } from '../../store/reducers/cart'
+
+import * as S from './styles'
+
+// Componentes para cada etapa do checkout
 
 import { useFormik } from 'formik'
 import { usePurchaseMutation } from '../../services/api'
@@ -168,16 +169,16 @@ const Cart = () => {
   }
 
   return (
-    <CartContainer className={isOpen ? 'is-open' : ''}>
-      <Overlay onClick={concludeAndClose} />
-      <Sidebar>
+    <S.CartContainer className={isOpen ? 'is-open' : ''}>
+      <S.Overlay onClick={concludeAndClose} />
+      <S.Sidebar>
         {orderId ? (
           <Confirmation orderId={orderId} onConclude={concludeAndClose} />
         ) : (
           <form onSubmit={formik.handleSubmit}>{renderStepComponent()}</form>
         )}
-      </Sidebar>
-    </CartContainer>
+      </S.Sidebar>
+    </S.CartContainer>
   )
 }
 

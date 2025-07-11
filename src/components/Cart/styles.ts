@@ -1,7 +1,8 @@
 import styled from 'styled-components'
-import { breakpoints, cores } from '../../styles'
 
 import lixeira from '../../assets/images/lixeira.svg'
+
+import { breakpoints, cores } from '../../styles'
 import { DefaultButton } from '../Button/styles'
 
 type TitleProps = {

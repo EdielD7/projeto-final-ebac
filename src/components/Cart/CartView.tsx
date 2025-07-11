@@ -1,8 +1,11 @@
-import { CartItem, Title, TotalValue } from './styles'
-import lixeira from '../../assets/images/lixeira.svg'
 import Button from '../Button'
+
+import lixeira from '../../assets/images/lixeira.svg'
+
 import { formataPreco } from '../../utils'
 import { CardapioItem } from '../../pages/Home'
+
+import * as S from './styles'
 
 type Props = {
   items: CardapioItem[]
@@ -24,21 +27,21 @@ const CartView = ({
       <>
         <ul>
           {items.map((item) => (
-            <CartItem key={item.id}>
+            <S.CartItem key={item.id}>
               <img src={item.foto} alt={item.nome} />
               <div>
-                <Title $variant="cart">{item.nome}</Title>
+                <S.Title $variant="cart">{item.nome}</S.Title>
                 <span>{formataPreco(item.preco)}</span>
               </div>
               <button type="button" onClick={() => onRemoveItem(item.id)}>
                 <img src={lixeira} alt="Remover item" />
               </button>
-            </CartItem>
+            </S.CartItem>
           ))}
         </ul>
-        <TotalValue>
+        <S.TotalValue>
           Valor total <span>{formataPreco(totalValue)}</span>
-        </TotalValue>
+        </S.TotalValue>
         <Button
           title="Clique para continuar com a entrega"
           variant="button"

@@ -1,5 +1,7 @@
-import { CardapioItem } from '../../pages/Home'
 import Product from '../Product'
+
+import { CardapioItem } from '../../pages/Home'
+
 import { Container, List } from './styles'
 
 type Props = {

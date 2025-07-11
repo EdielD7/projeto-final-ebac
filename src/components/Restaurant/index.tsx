@@ -1,15 +1,8 @@
-import {
-  Card,
-  CardBody,
-  Descricao,
-  CardHeader,
-  Nota,
-  Infos,
-  Img
-} from './styles'
+import Button from '../Button'
 
 import star from '../../assets/images/star.svg'
-import Button from '../Button'
+
+import * as S from './styles'
 
 type Props = {
   id: number
@@ -36,28 +29,28 @@ const Restaurant = ({
   }
 
   return (
-    <Card>
-      <Img src={image} alt={title} />
-      <Infos>
+    <S.Card>
+      <S.Img src={image} alt={title} />
+      <S.Infos>
         {infos.map((info) => (
           <Button variant="tag" key={info} title={title}>
             {info}
           </Button>
         ))}
-      </Infos>
-      <CardBody>
-        <CardHeader>
+      </S.Infos>
+      <S.CardBody>
+        <S.CardHeader>
           <h3>{title}</h3>
-          <Nota>
+          <S.Nota>
             {rating} <img src={star} alt="estrela(s)" />
-          </Nota>
-        </CardHeader>
-        <Descricao>{getDescricao(description)}</Descricao>
+          </S.Nota>
+        </S.CardHeader>
+        <S.Descricao>{getDescricao(description)}</S.Descricao>
         <Button variant="link" title="Saiba mais" to={`/profile/${id}`}>
           Saiba mais
         </Button>
-      </CardBody>
-    </Card>
+      </S.CardBody>
+    </S.Card>
   )
 }
 

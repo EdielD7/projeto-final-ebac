@@ -1,7 +1,10 @@
 import { FormikProps } from 'formik'
+
 import Button from '../Button'
-import { InputGroup, Inputs, Row, Title } from './styles'
+
 import { FormikData } from '.'
+
+import * as S from './styles'
 
 type Props = {
   formik: FormikProps<FormikData>
@@ -22,9 +25,9 @@ const PaymentForm = ({ formik, onBackToDelivery }: Props) => {
 
   return (
     <>
-      <Title>Pagamento - Valor a pagar: R$ 190,90</Title>
-      <Inputs>
-        <InputGroup>
+      <S.Title>Pagamento - Valor a pagar: R$ 190,90</S.Title>
+      <S.Inputs>
+        <S.InputGroup>
           <label htmlFor="cardOwner">Nome no cartão</label>
           <input
             id="cardOwner"
@@ -35,9 +38,9 @@ const PaymentForm = ({ formik, onBackToDelivery }: Props) => {
             onBlur={formik.handleBlur}
           />
           <small>{getErrorMessage('cardOwner', formik.errors.cardOwner)}</small>
-        </InputGroup>
-        <Row>
-          <InputGroup>
+        </S.InputGroup>
+        <S.Row>
+          <S.InputGroup>
             <label htmlFor="cardNumber">Número do cartão</label>
             <input
               id="cardNumber"
@@ -50,8 +53,8 @@ const PaymentForm = ({ formik, onBackToDelivery }: Props) => {
             <small>
               {getErrorMessage('cardNumber', formik.errors.cardNumber)}
             </small>
-          </InputGroup>
-          <InputGroup>
+          </S.InputGroup>
+          <S.InputGroup>
             <label htmlFor="cvv">CVV</label>
             <input
               id="cvv"
@@ -62,10 +65,10 @@ const PaymentForm = ({ formik, onBackToDelivery }: Props) => {
               onBlur={formik.handleBlur}
             />
             <small>{getErrorMessage('cvv', formik.errors.cvv)}</small>
-          </InputGroup>
-        </Row>
-        <Row>
-          <InputGroup>
+          </S.InputGroup>
+        </S.Row>
+        <S.Row>
+          <S.InputGroup>
             <label htmlFor="expiresMonth">Mês de vencimento</label>
             <input
               id="expiresMonth"
@@ -78,8 +81,8 @@ const PaymentForm = ({ formik, onBackToDelivery }: Props) => {
             <small>
               {getErrorMessage('expiresMonth', formik.errors.expiresMonth)}
             </small>
-          </InputGroup>
-          <InputGroup>
+          </S.InputGroup>
+          <S.InputGroup>
             <label htmlFor="expiresYear">Ano de vencimento</label>
             <input
               id="expiresYear"
@@ -92,9 +95,9 @@ const PaymentForm = ({ formik, onBackToDelivery }: Props) => {
             <small>
               {getErrorMessage('expiresYear', formik.errors.expiresYear)}
             </small>
-          </InputGroup>
-        </Row>
-      </Inputs>
+          </S.InputGroup>
+        </S.Row>
+      </S.Inputs>
       <Button
         variant="button"
         type="submit"
