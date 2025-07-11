@@ -58,16 +58,33 @@ export const RestaurantesLink = styled(Link)`
   font-weight: 900;
   color: ${cores.rosaEscuro};
   font-size: 18px;
-`
 
-export const Links = styled.ul`
-  display: flex;
-  list-style: none;
+  p {
+    @media (max-width: ${breakpoints.tablet}) {
+      display: none;
+    }
+  }
 `
 
 export const CartLink = styled.a`
-  display: flex;
+  /* display: flex; */
   cursor: pointer;
   font-weight: 900;
   font-size: 18px;
+
+  p {
+    @media (max-width: ${breakpoints.tablet}) {
+      display: none;
+    }
+  }
+`
+
+export const MobileImg = styled.img`
+  display: none;
+  width: 32px;
+  color: ${cores.rosaEscuro};
+
+  @media (max-width: ${breakpoints.tablet}) {
+    display: block;
+  }
 `

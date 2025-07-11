@@ -1,17 +1,19 @@
 import { useLocation } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
 import {
   HeaderBar,
-  Links,
   CartLink,
   Titulo,
   RestaurantesLink,
   ProfileLogo,
-  HomeLogo
+  HomeLogo,
+  MobileImg
 } from './styles'
 
 import logo from '../../assets/images/logo.svg'
-import { useDispatch, useSelector } from 'react-redux'
+import back from '../../assets/images/back.svg'
+import carrinho from '../../assets/images/carrinho.svg'
 import { open } from '../../store/reducers/cart'
 import { RootReducer } from '../../store'
 
@@ -32,14 +34,15 @@ const Header = () => {
       <div className="container">
         {isProfilePage ? (
           <div className="container">
-            <Links>
-              <li>
-                <RestaurantesLink to="/">Restaurantes</RestaurantesLink>
-              </li>
-            </Links>
+            <RestaurantesLink to="/">
+              <MobileImg src={back} alt="Restaurantes" />
+              <p>Restaurantes</p>
+            </RestaurantesLink>
+
             <ProfileLogo src={logo} alt="EFOOD" />
             <CartLink onClick={openCart}>
-              {items.length} produto(s) no carrinho
+              <MobileImg src={carrinho} alt="Carrinho" />
+              <p>{items.length} produto(s) no carrinho</p>
             </CartLink>
           </div>
         ) : (
