@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { RootReducer } from '../../store'
-import { close, remove } from '../../store/reducers/cart'
+import { close, remove, clear } from '../../store/reducers/cart'
 
 import { Overlay, CartContainer, Sidebar } from './styles'
 import * as Yup from 'yup'
@@ -11,6 +11,8 @@ import * as Yup from 'yup'
 import CartView from './CartView'
 import DeliveryForm from './DeliveryForm'
 import PaymentForm from './PaymentForm'
+import Confirmation from './Confirmation'
+
 import { useFormik } from 'formik'
 import { usePurchaseMutation } from '../../services/api'
 
@@ -39,7 +41,10 @@ const Cart = () => {
   // 1. Estado para controlar a etapa atual
   const [currentStep, setCurrentStep] = useState<Step>('cart')
 
-  const [purchase, { isLoading, isError, data }] = usePurchaseMutation()
+  const [orderId, setOrderId] = useState('')
+
+  const [purchase, { isLoading, isError, data, isSuccess }] =
+    usePurchaseMutation()
 
   const formik = useFormik({
     initialValues: {
@@ -110,9 +115,9 @@ const Cart = () => {
     }
   })
 
-  const closeCart = () => {
-    dispatch(close())
-  }
+  // const closeCart = () => {
+  //   dispatch(close())
+  // }
 
   const removeItem = (id: number) => {
     dispatch(remove(id))
@@ -122,10 +127,24 @@ const Cart = () => {
     return (acc += item.preco)
   }, 0)
 
+  useEffect(() => {
+    if (data) {
+      setOrderId(data.orderId)
+      dispatch(clear()) // Limpa os itens do carrinho no Redux
+    }
+  }, [data, dispatch])
+
   // 2. Funções de navegação que mudam o estado da etapa
   const goToDelivery = () => setCurrentStep('delivery')
   const goToPayment = () => setCurrentStep('payment')
   const goToCart = () => setCurrentStep('cart')
+
+  const concludeAndClose = () => {
+    dispatch(close())
+    // Reseta os estados para a próxima vez que o carrinho for aberto
+    setCurrentStep('cart')
+    setOrderId('')
+  }
 
   // 3. Função que decide qual componente renderizar
   const renderStepComponent = () => {
@@ -155,9 +174,13 @@ const Cart = () => {
 
   return (
     <CartContainer className={isOpen ? 'is-open' : ''}>
-      <Overlay onClick={closeCart} />
+      <Overlay onClick={concludeAndClose} />
       <Sidebar>
-        <form onSubmit={formik.handleSubmit}>{renderStepComponent()}</form>
+        {orderId ? (
+          <Confirmation orderId={orderId} onConclude={concludeAndClose} />
+        ) : (
+          <form onSubmit={formik.handleSubmit}>{renderStepComponent()}</form>
+        )}
       </Sidebar>
     </CartContainer>
   )

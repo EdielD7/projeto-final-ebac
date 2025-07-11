@@ -154,3 +154,14 @@ export const InputGroup = styled.div`
     }
   }
 `
+
+export const Paragraph = styled.p`
+  font-size: 14px;
+  line-height: 22px;
+  color: ${cores.rosa}; // Usando a cor rosa claro do seu tema
+  margin-bottom: 16px;
+
+  &:last-of-type {
+    margin-bottom: 24px;
+  }
+`

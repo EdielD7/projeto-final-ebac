@@ -30,7 +30,7 @@ export const Img = styled.img`
   object-fit: cover;
 `
 
-export const Button = styled.button`
+export const ModalButton = styled.button`
   background-color: ${cores.rosa};
   color: ${cores.rosaEscuro};
   border: none;

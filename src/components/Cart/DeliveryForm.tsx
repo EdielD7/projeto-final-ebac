@@ -21,6 +21,31 @@ const DeliveryForm = ({ formik, onBackToCart, onGoToPayment }: Props) => {
     return ''
   }
 
+  const handleContinue = async () => {
+    // Lista dos campos que pertencem a ESTA etapa
+    const deliveryFields: (keyof FormikData)[] = [
+      'receiver',
+      'address',
+      'city',
+      'zipCode',
+      'number'
+    ]
+
+    // Valida o formulário inteiro e espera pela resposta
+    const errors = await formik.validateForm()
+
+    // Marca todos os campos desta etapa como "tocados" para que os erros apareçam
+    deliveryFields.forEach((field) => formik.setFieldTouched(field))
+
+    // Verifica se algum dos campos desta etapa possui um erro no objeto de erros
+    const hasDeliveryErrors = deliveryFields.some((field) => errors[field])
+
+    // Se NÃO houver erros de entrega, navegue para o pagamento
+    if (!hasDeliveryErrors) {
+      onGoToPayment()
+    }
+  }
+
   return (
     <>
       <Title>Entrega</Title>
@@ -105,7 +130,7 @@ const DeliveryForm = ({ formik, onBackToCart, onGoToPayment }: Props) => {
       <Button
         variant="button"
         title="Clique para ir para o pagamento"
-        onClick={onGoToPayment}
+        onClick={handleContinue}
       >
         Continuar com o pagamento
       </Button>

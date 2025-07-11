@@ -3,10 +3,10 @@ import {
   Title,
   Descricao,
   Img,
-  Button,
   Modal,
   ModalContent,
-  ModalContainer
+  ModalContainer,
+  ModalButton
 } from './styles'
 import fechar from '../../assets/images/fechar.svg'
 import { useState } from 'react'
@@ -14,6 +14,7 @@ import { useDispatch } from 'react-redux'
 import { add, open } from '../../store/reducers/cart'
 import { CardapioItem } from '../../pages/Home'
 import { formataPreco } from '../../utils'
+import Button from '../Button'
 
 type Props = {
   cardapioitem: CardapioItem
@@ -21,11 +22,6 @@ type Props = {
   description: string
   image: string
   portion: string
-}
-
-interface ModalState {
-  url: string
-  isVisible: boolean
 }
 
 const Product = ({
@@ -68,7 +64,11 @@ const Product = ({
         <Title>{title}</Title>
 
         <Descricao>{getDescricao(description)}</Descricao>
-        <Button onClick={() => setModalVisible(true)}>
+        <Button
+          variant="button"
+          title="Adicionar ao carrinho"
+          onClick={() => setModalVisible(true)}
+        >
           Adicionar ao carrinho
         </Button>
       </Card>
@@ -84,9 +84,9 @@ const Product = ({
                 <br />
                 {portion}
               </p>
-              <Button onClick={botaoModal}>
-                Adicionar ao carrinho - {formataPreco(cardapioitem.preco)}
-              </Button>
+              <ModalButton title="Adicionar ao carrinho" onClick={botaoModal}>
+                {`Adicionar ao carrinho - ${formataPreco(cardapioitem.preco)}`}
+              </ModalButton>
             </div>
           </ModalContainer>
           <img
