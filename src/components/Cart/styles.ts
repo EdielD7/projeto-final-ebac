@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 import lixeira from '../../assets/images/lixeira.svg'
 import { DefaultButton } from '../Button/styles'
@@ -49,6 +49,10 @@ export const Sidebar = styled.aside`
   ${DefaultButton} {
     margin-bottom: 8px;
   }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    max-width: 100%; /* Remove a largura máxima para ocupar a tela toda */
+  }
 `
 
 export const Inputs = styled.div`
@@ -65,13 +69,6 @@ export const Title = styled.h2<TitleProps>`
   font-weight: bold;
   padding-bottom: 16px;
 `
-
-// export const ValorContainer = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   margin-top: 40px;
-//   margin-bottom: 16px;
-// `
 
 export const TotalValue = styled.p`
   font-weight: 700;
@@ -119,9 +116,6 @@ export const CartItem = styled.li`
   }
 `
 
-// ... (mantenha todos os seus estilos existentes)
-
-// Estilos para os formulários
 export const Row = styled.div`
   display: flex;
   column-gap: 24px;
@@ -158,7 +152,7 @@ export const InputGroup = styled.div`
 export const Paragraph = styled.p`
   font-size: 14px;
   line-height: 22px;
-  color: ${cores.rosa}; // Usando a cor rosa claro do seu tema
+  color: ${cores.rosa};
   margin-bottom: 16px;
 
   &:last-of-type {

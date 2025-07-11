@@ -4,19 +4,20 @@ import Button from '../Button'
 import { formataPreco } from '../../utils'
 import { CardapioItem } from '../../pages/Home'
 
-// Tipagem das Props que o componente recebe do pai
 type Props = {
-  items: CardapioItem[] // Você já deve ter esse tipo definido
+  items: CardapioItem[]
   totalValue: number
   onRemoveItem: (id: number) => void
   onGoToDelivery: () => void
+  onClose: () => void
 }
 
 const CartView = ({
   items,
   totalValue,
   onRemoveItem,
-  onGoToDelivery
+  onGoToDelivery,
+  onClose
 }: Props) => (
   <>
     {items.length > 0 ? (
@@ -45,12 +46,32 @@ const CartView = ({
         >
           Continuar com a entrega
         </Button>
+        <Button
+          title="Continuar comprando"
+          variant="button"
+          type="button"
+          onClick={onClose}
+        >
+          Voltar para o restaurante
+        </Button>
       </>
     ) : (
-      <p className="empty-text">
-        O carrinho está vazio, adicione pelo menos um produto para continuar com
-        a compra.
-      </p>
+      <>
+        <p className="empty-text">
+          O carrinho está vazio, adicione pelo menos um produto para continuar
+          com a compra.
+        </p>
+        <div style={{ marginTop: '16px' }}>
+          <Button
+            title="Escolher produtos"
+            variant="button"
+            type="button"
+            onClick={onClose}
+          >
+            Escolher produtos
+          </Button>
+        </div>
+      </>
     )}
   </>
 )

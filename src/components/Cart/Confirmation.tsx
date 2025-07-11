@@ -1,7 +1,6 @@
 import Button from '../Button'
 import { Title, Paragraph } from './styles' // Vamos adicionar o Paragraph aos estilos
 
-// Definimos as props que o componente espera receber do pai (Cart/index.tsx)
 type Props = {
   orderId: string
   onConclude: () => void

@@ -70,8 +70,8 @@ const Cart = () => {
       address: Yup.string().required('O campo é obrigatório'),
       city: Yup.string().required('O campo é obrigatório'),
       zipCode: Yup.string()
-        .min(8, 'O CEP precisa ter 8 caracteres')
-        .max(8, 'O CEP precisa ter 8 caracteres')
+        .min(9, 'O CEP precisa ter 9 caracteres')
+        .max(9, 'O CEP precisa ter 9 caracteres')
         .required('O campo é obrigatório'),
       number: Yup.string().required('O campo é obrigatório'),
 
@@ -130,23 +130,20 @@ const Cart = () => {
   useEffect(() => {
     if (data) {
       setOrderId(data.orderId)
-      dispatch(clear()) // Limpa os itens do carrinho no Redux
+      dispatch(clear())
     }
   }, [data, dispatch])
 
-  // 2. Funções de navegação que mudam o estado da etapa
   const goToDelivery = () => setCurrentStep('delivery')
   const goToPayment = () => setCurrentStep('payment')
   const goToCart = () => setCurrentStep('cart')
 
   const concludeAndClose = () => {
     dispatch(close())
-    // Reseta os estados para a próxima vez que o carrinho for aberto
     setCurrentStep('cart')
     setOrderId('')
   }
 
-  // 3. Função que decide qual componente renderizar
   const renderStepComponent = () => {
     switch (currentStep) {
       case 'delivery':
@@ -167,6 +164,7 @@ const Cart = () => {
             totalValue={valorTotal}
             onRemoveItem={removeItem}
             onGoToDelivery={goToDelivery}
+            onClose={concludeAndClose}
           />
         )
     }
