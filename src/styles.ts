@@ -38,8 +38,8 @@ export const GlobalCss = createGlobalStyle`
   .loading {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    margin-top: 32px;
+    height: 80vh;
 
     h3 {
       font-size: 36px;

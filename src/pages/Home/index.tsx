@@ -81,9 +81,9 @@ export interface Restaurante {
 // ]
 
 const Home = () => {
-  const { data: restaurantes } = useGetRestaurantesQuery()
+  const { data: restaurantes, isLoading, isError } = useGetRestaurantesQuery()
 
-  if (!restaurantes) {
+  if (isLoading) {
     return (
       <>
         <Header />
@@ -94,6 +94,38 @@ const Home = () => {
     )
   }
 
+  // Se a requisição falhou
+  if (isError) {
+    return (
+      <>
+        <Header />
+        <div
+          className="container"
+          style={{ textAlign: 'center', padding: '80px 0' }}
+        >
+          <h2>Ocorreu um erro ao buscar os restaurantes.</h2>
+          <p>Por favor, tente novamente mais tarde.</p>
+        </div>
+      </>
+    )
+  }
+
+  // Se a requisição foi bem-sucedida, mas não retornou restaurantes
+  if (!restaurantes || restaurantes.length === 0) {
+    return (
+      <>
+        <Header />
+        <div
+          className="container"
+          style={{ textAlign: 'center', padding: '80px 0' }}
+        >
+          <h2>Nenhum restaurante encontrado.</h2>
+        </div>
+      </>
+    )
+  }
+
+  // Se tudo deu certo
   return (
     <>
       <Header />

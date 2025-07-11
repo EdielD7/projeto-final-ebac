@@ -12,9 +12,13 @@ import Cart from '../../components/Cart'
 const Profile = () => {
   const { id } = useParams()
 
-  const { data: restaurante } = useGetRestauranteQuery(id ?? '')
+  const {
+    data: restaurante,
+    isLoading,
+    isError
+  } = useGetRestauranteQuery(id ?? '')
 
-  if (!restaurante) {
+  if (isLoading) {
     return (
       <>
         <Header />
@@ -25,6 +29,26 @@ const Profile = () => {
     )
   }
 
+  // Tratamento de erro
+  if (isError || !restaurante) {
+    return (
+      <>
+        <Header />
+        <div
+          className="container"
+          style={{ textAlign: 'center', padding: '80px 0' }}
+        >
+          <h2>Ocorreu um erro ao carregar o cardápio.</h2>
+          <p>
+            Restaurante não encontrado ou indisponível. Tente novamente mais
+            tarde.
+          </p>
+        </div>
+      </>
+    )
+  }
+
+  // Renderização de sucesso
   return (
     <>
       <Header />
@@ -35,7 +59,6 @@ const Profile = () => {
       />
       <ProductsList cardapio={restaurante.cardapio} />
       <Cart />
-      {/* <Checkout /> */}
     </>
   )
 }
