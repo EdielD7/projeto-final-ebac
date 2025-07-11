@@ -40,7 +40,7 @@ const Restaurant = ({
       <Img src={image} alt={title} />
       <Infos>
         {infos.map((info) => (
-          <Button type="tag" key={info} title={title}>
+          <Button variant="tag" key={info} title={title}>
             {info}
           </Button>
         ))}
@@ -53,7 +53,7 @@ const Restaurant = ({
           </Nota>
         </CardHeader>
         <Descricao>{getDescricao(description)}</Descricao>
-        <Button type="link" title="Saiba mais" to={`/profile/${id}`}>
+        <Button variant="link" title="Saiba mais" to={`/profile/${id}`}>
           Saiba mais
         </Button>
       </CardBody>

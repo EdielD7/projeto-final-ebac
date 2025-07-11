@@ -12,6 +12,7 @@ import CartView from './CartView'
 import DeliveryForm from './DeliveryForm'
 import PaymentForm from './PaymentForm'
 import { useFormik } from 'formik'
+import { usePurchaseMutation } from '../../services/api'
 
 export interface FormikData {
   receiver: string
@@ -37,6 +38,8 @@ const Cart = () => {
 
   // 1. Estado para controlar a etapa atual
   const [currentStep, setCurrentStep] = useState<Step>('cart')
+
+  const [purchase, { isLoading, isError, data }] = usePurchaseMutation()
 
   const formik = useFormik({
     initialValues: {
@@ -75,7 +78,35 @@ const Cart = () => {
       expiresYear: Yup.string().required('O campo é obrigatório')
     }),
     onSubmit: (values) => {
-      console.log(values)
+      purchase({
+        delivery: {
+          receiver: values.receiver,
+          address: {
+            description: values.address,
+            city: values.city,
+            zipCode: values.zipCode,
+            number: Number(values.number),
+            complement: values.complement
+          }
+        },
+        payment: {
+          card: {
+            owner: values.cardOwner,
+            number: values.cardNumber,
+            code: Number(values.cvv),
+            expires: {
+              month: Number(values.expiresMonth),
+              year: Number(values.expiresYear)
+            }
+          }
+        },
+        products: [
+          {
+            id: 1,
+            price: 10
+          }
+        ]
+      })
     }
   })
 
