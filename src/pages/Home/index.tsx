@@ -1,5 +1,5 @@
 import RestaurantList from '../../components/RestaurantList'
-import Header from '../../components/Header'
+import Hero from '../../components/Hero'
 
 import { useGetRestaurantesQuery } from '../../services/api'
 
@@ -86,7 +86,7 @@ const Home = () => {
   if (isLoading) {
     return (
       <>
-        <Header />
+        <Hero />
         <div className="loading">
           <h3>Carregando...</h3>
         </div>
@@ -98,7 +98,7 @@ const Home = () => {
   if (isError) {
     return (
       <>
-        <Header />
+        <Hero />
         <div
           className="container"
           style={{ textAlign: 'center', padding: '80px 0' }}
@@ -114,7 +114,7 @@ const Home = () => {
   if (!restaurantes || restaurantes.length === 0) {
     return (
       <>
-        <Header />
+        <Hero />
         <div
           className="container"
           style={{ textAlign: 'center', padding: '80px 0' }}
@@ -128,7 +128,7 @@ const Home = () => {
   // Se tudo deu certo
   return (
     <>
-      <Header />
+      <Hero /> {/* Usamos o Hero aqui */}
       <RestaurantList restaurantes={restaurantes} />
     </>
   )
