@@ -13,15 +13,13 @@ type Props = {
 }
 
 const DeliveryForm = ({ formik, onBackToCart, onGoToPayment }: Props) => {
-  const getErrorMessage = (fieldName: keyof FormikData, message?: string) => {
+  const checkInputHasError = (fieldName: keyof FormikData) => {
     const isTouched = fieldName in formik.touched
     const isInvalid = fieldName in formik.errors
 
-    if (isTouched && isInvalid) {
-      return message || formik.errors[fieldName]
-    }
+    const hasError = isTouched && isInvalid
 
-    return ''
+    return hasError
   }
 
   const handleContinue = async () => {
@@ -62,8 +60,8 @@ const DeliveryForm = ({ formik, onBackToCart, onGoToPayment }: Props) => {
             type="text"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
+            className={checkInputHasError('receiver') ? 'error' : ''}
           />
-          <small>{getErrorMessage('receiver', formik.errors.receiver)}</small>
         </S.InputGroup>
         <S.InputGroup>
           <label htmlFor="address">Endereço</label>
@@ -74,8 +72,8 @@ const DeliveryForm = ({ formik, onBackToCart, onGoToPayment }: Props) => {
             value={formik.values.address}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
+            className={checkInputHasError('address') ? 'error' : ''}
           />
-          <small>{getErrorMessage('address', formik.errors.address)}</small>
         </S.InputGroup>
         <S.InputGroup>
           <label htmlFor="city">Cidade</label>
@@ -86,8 +84,8 @@ const DeliveryForm = ({ formik, onBackToCart, onGoToPayment }: Props) => {
             value={formik.values.city}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
+            className={checkInputHasError('city') ? 'error' : ''}
           />
-          <small>{getErrorMessage('city', formik.errors.city)}</small>
         </S.InputGroup>
         <S.Row>
           <S.InputGroup>
@@ -99,8 +97,8 @@ const DeliveryForm = ({ formik, onBackToCart, onGoToPayment }: Props) => {
               value={formik.values.zipCode}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              className={checkInputHasError('zipCode') ? 'error' : ''}
             />
-            <small>{getErrorMessage('zipCode', formik.errors.zipCode)}</small>
           </S.InputGroup>
           <S.InputGroup>
             <label htmlFor="number">Número</label>
@@ -111,8 +109,8 @@ const DeliveryForm = ({ formik, onBackToCart, onGoToPayment }: Props) => {
               value={formik.values.number}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              className={checkInputHasError('number') ? 'error' : ''}
             />
-            <small>{getErrorMessage('number', formik.errors.number)}</small>
           </S.InputGroup>
         </S.Row>
         <S.InputGroup>
@@ -124,10 +122,8 @@ const DeliveryForm = ({ formik, onBackToCart, onGoToPayment }: Props) => {
             value={formik.values.complement}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
+            className={checkInputHasError('complement') ? 'error' : ''}
           />
-          <small>
-            {getErrorMessage('complement', formik.errors.complement)}
-          </small>
         </S.InputGroup>
       </S.Inputs>
       <Button

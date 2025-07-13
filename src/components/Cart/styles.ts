@@ -146,6 +146,7 @@ export const InputGroup = styled.div`
 
     &.error {
       border: 2px solid red;
+      background-color: #fff;
     }
   }
 `

@@ -12,15 +12,13 @@ type Props = {
 }
 
 const PaymentForm = ({ formik, onBackToDelivery }: Props) => {
-  const getErrorMessage = (fieldName: keyof FormikData, message?: string) => {
+  const checkInputHasError = (fieldName: keyof FormikData) => {
     const isTouched = fieldName in formik.touched
     const isInvalid = fieldName in formik.errors
 
-    if (isTouched && isInvalid) {
-      return message || formik.errors[fieldName]
-    }
+    const hasError = isTouched && isInvalid
 
-    return ''
+    return hasError
   }
 
   return (
@@ -36,8 +34,8 @@ const PaymentForm = ({ formik, onBackToDelivery }: Props) => {
             value={formik.values.cardOwner}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
+            className={checkInputHasError('cardOwner') ? 'error' : ''}
           />
-          <small>{getErrorMessage('cardOwner', formik.errors.cardOwner)}</small>
         </S.InputGroup>
         <S.Row>
           <S.InputGroup>
@@ -49,10 +47,8 @@ const PaymentForm = ({ formik, onBackToDelivery }: Props) => {
               value={formik.values.cardNumber}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              className={checkInputHasError('cardNumber') ? 'error' : ''}
             />
-            <small>
-              {getErrorMessage('cardNumber', formik.errors.cardNumber)}
-            </small>
           </S.InputGroup>
           <S.InputGroup>
             <label htmlFor="cvv">CVV</label>
@@ -63,8 +59,8 @@ const PaymentForm = ({ formik, onBackToDelivery }: Props) => {
               value={formik.values.cvv}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              className={checkInputHasError('cvv') ? 'error' : ''}
             />
-            <small>{getErrorMessage('cvv', formik.errors.cvv)}</small>
           </S.InputGroup>
         </S.Row>
         <S.Row>
@@ -77,10 +73,8 @@ const PaymentForm = ({ formik, onBackToDelivery }: Props) => {
               value={formik.values.expiresMonth}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              className={checkInputHasError('expiresMonth') ? 'error' : ''}
             />
-            <small>
-              {getErrorMessage('expiresMonth', formik.errors.expiresMonth)}
-            </small>
           </S.InputGroup>
           <S.InputGroup>
             <label htmlFor="expiresYear">Ano de vencimento</label>
@@ -91,10 +85,8 @@ const PaymentForm = ({ formik, onBackToDelivery }: Props) => {
               value={formik.values.expiresYear}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              className={checkInputHasError('expiresYear') ? 'error' : ''}
             />
-            <small>
-              {getErrorMessage('expiresYear', formik.errors.expiresYear)}
-            </small>
           </S.InputGroup>
         </S.Row>
       </S.Inputs>
